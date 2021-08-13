@@ -4,6 +4,8 @@ import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +22,7 @@ public class DepartmentController {
 	private DepartmentServiceImpl departmentService;
 
 	// This method is for getting list of all departments
-	@RequestMapping("/dept")
+	@GetMapping("/dept")
 	public ModelAndView departments(Model m) {
 		m.addAttribute("getall", departmentService.findAll());
 		return new ModelAndView("DepartmentList");
@@ -51,7 +53,7 @@ public class DepartmentController {
 	}
 
 	// This method is invoked when deleting of department is required
-	@RequestMapping("/deleteDept")
+	@DeleteMapping("/deleteDept")
 	public @ResponseBody String deleteDept(@RequestParam("deptid") String deptid) {
 		departmentService.deleteDept(deptid);
 		return "Department deleted successfully";
